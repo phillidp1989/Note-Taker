@@ -3,10 +3,10 @@ const path = require('path');
 const fs = require("fs");
 const util = require("util");
 
+// Set paths for json file to read and write to
+
 const jsonFolderPath = path.join(__dirname, "db");
 const jsonFilePath = path.join(jsonFolderPath, "/db.json");
-
-
 
 // Variable to hold instance of Express object
 
@@ -20,6 +20,8 @@ const PORT = process.env.PORT || 8080;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Set static folder
 
 app.use(express.static(path.join(__dirname, "public")));
 
