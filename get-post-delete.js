@@ -25,7 +25,7 @@ const postNotes = (req, res) => {
         if (notesArray.length === 0) {
             newNote.id = 1;
         } else {
-            newNote.id = notesArray.length + 1;
+            newNote.id = notesArray[notesArray.length -1].id + 1;
         }
 
         notesArray.push(newNote);
@@ -35,8 +35,38 @@ const postNotes = (req, res) => {
             if (err) throw err;
         });
 
-    })
+    });
 
 }
 
-module.exports = postNotes;
+const getNotes = (req, res) => {
+    fs.readFile(jsonFilePath, (err, data) => {
+        if (err) throw err;
+        res.json(JSON.parse(data))
+    });
+}
+
+const deleteNotes = (req, res) => {
+
+    let deletedNote = parseInt(req.params.id);    
+    let notesArray = [];
+    fs.readFile(jsonFilePath, (err, data) => {
+        if (err) throw err;
+        notesArray = (JSON.parse(data));
+        for (let i = 0; i < notesArray.length; i++) {
+            if (deletedNote === notesArray[i].id) {
+                res.json(notesArray.splice(i, 1));
+            }
+        }
+
+        fs.writeFile(jsonFilePath, JSON.stringify(notesArray, null, 2), (err) => {
+            if (err) throw err;
+        });
+    })
+}
+
+module.exports = {
+    postNotes,
+    getNotes,
+    deleteNotes
+};

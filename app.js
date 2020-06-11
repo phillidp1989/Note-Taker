@@ -2,7 +2,7 @@ const express = require("express");
 const path = require('path');
 const fs = require("fs");
 const util = require("util");
-const postNotes = require("./get-post-delete");
+const { getNotes, postNotes, deleteNotes } = require("./get-post-delete");
 
 // Set paths for json file to read and write to
 
@@ -15,7 +15,7 @@ const app = express();
 
 // Variable to hold local port or port of deployed site
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 // Setup Express to handle data parsing
 
@@ -34,12 +34,11 @@ app.get("/notes", (req, res) => {
 
 // API route handling
 
-app.get("/api/notes", (req, res) => {
-    fs.readFile(jsonFilePath, (err, data) => {
-        if (err) throw err;
-        res.json(JSON.parse(data))
-    })
-})
+app.get("/api/notes", getNotes);
+
+app.post("/api/notes", postNotes);
+
+app.delete("/api/notes/:id", deleteNotes);
 
 // Final HTML routes to direct users to the homepage
 
@@ -47,7 +46,6 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "/public", "index.html"));
 });
 
-app.post("/api/notes", postNotes);
 
 // Listening to port and console logging confirmation of port being listened to
 
