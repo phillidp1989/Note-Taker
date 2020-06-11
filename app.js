@@ -2,6 +2,7 @@ const express = require("express");
 const path = require('path');
 const fs = require("fs");
 const util = require("util");
+const postNotes = require("./get-post-delete");
 
 // Set paths for json file to read and write to
 
@@ -34,8 +35,8 @@ app.get("/notes", (req, res) => {
 // API route handling
 
 app.get("/api/notes", (req, res) => {
-    fs.readFile(jsonFilePath, (err, data) => {  
-        if (err) throw err;      
+    fs.readFile(jsonFilePath, (err, data) => {
+        if (err) throw err;
         res.json(JSON.parse(data))
     })
 })
@@ -46,6 +47,9 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "/public", "index.html"));
 });
 
+app.post("/api/notes", postNotes);
+
 // Listening to port and console logging confirmation of port being listened to
 
-app.listen(PORT, () => console.log (`Server started on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+

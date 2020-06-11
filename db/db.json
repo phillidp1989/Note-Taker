@@ -1,10 +1,7 @@
 [
-{
-"title":"Test Title",
-"text":"Test text",
-"id":"6"
-}
-
+  {
+    "title": "First test",
+    "text": "should have an id",
+    "id": 1
+  }
 ]
-
-
