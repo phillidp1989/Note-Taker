@@ -8,7 +8,7 @@ const jsonFilePath = path.join(jsonFolderPath, "/db.json");
 
 const postNotes = (req, res) => {
     // Variable to hold new note object obtained from the body of the post request
-    
+
     let newNote = req.body;
 
     // Initialise an empty array to push note objects into
@@ -24,13 +24,25 @@ const postNotes = (req, res) => {
 
         // Assignment of id to new note object
 
-        if (notesArray.length === 0) {
-            newNote.id = 1;
-        } else {
-            newNote.id = notesArray[notesArray.length -1].id + 1;
-        }
 
-        notesArray.push(newNote);
+        if (newNote.id === undefined) {
+
+            if (notesArray.length === 0) {
+                newNote.id = 1;
+            } else {
+                newNote.id = notesArray[notesArray.length - 1].id + 1;
+            }
+
+            notesArray.push(newNote);
+        } else {
+            for (let i = 0; i < notesArray.length; i++) {
+
+                if (parseInt(newNote.id) === parseInt(notesArray[i].id)) {
+
+                    notesArray[i] = newNote;
+                }
+            }
+        }
         res.json(notesArray);
 
         fs.writeFile(jsonFilePath, JSON.stringify(notesArray, null, 2), (err) => {
@@ -54,15 +66,18 @@ const getNotes = (req, res) => {
 
 const deleteNotes = (req, res) => {
 
-    let deletedNote = parseInt(req.params.id);    
+    
+    let deletedNote = parseInt(req.params.id);
     let notesArray = [];
     fs.readFile(jsonFilePath, (err, data) => {
         if (err) throw err;
-        notesArray = (JSON.parse(data));
+        notesArray = (JSON.parse(data));       
+                
         notesArray = notesArray.filter(note => {
-            return note.id !== deletedNote;
+            return parseInt(note.id) !== deletedNote;
         });
-        res.json(notesArray);       
+        
+        res.json(notesArray);
 
         fs.writeFile(jsonFilePath, JSON.stringify(notesArray, null, 2), (err) => {
             if (err) throw err;
