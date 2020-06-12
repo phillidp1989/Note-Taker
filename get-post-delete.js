@@ -4,9 +4,11 @@ const path = require('path');
 const jsonFolderPath = path.join(__dirname, "db");
 const jsonFilePath = path.join(jsonFolderPath, "/db.json");
 
+// Post notes function
+
 const postNotes = (req, res) => {
     // Variable to hold new note object obtained from the body of the post request
-
+    
     let newNote = req.body;
 
     // Initialise an empty array to push note objects into
@@ -25,7 +27,7 @@ const postNotes = (req, res) => {
         if (notesArray.length === 0) {
             newNote.id = 1;
         } else {
-            newNote.id = notesArray.length + 1;
+            newNote.id = notesArray[notesArray.length -1].id + 1;
         }
 
         notesArray.push(newNote);
@@ -35,8 +37,41 @@ const postNotes = (req, res) => {
             if (err) throw err;
         });
 
-    })
+    });
 
 }
 
-module.exports = postNotes;
+// Get notes callback function
+
+const getNotes = (req, res) => {
+    fs.readFile(jsonFilePath, (err, data) => {
+        if (err) throw err;
+        res.json(JSON.parse(data))
+    });
+}
+
+// Delete note callback function
+
+const deleteNotes = (req, res) => {
+
+    let deletedNote = parseInt(req.params.id);    
+    let notesArray = [];
+    fs.readFile(jsonFilePath, (err, data) => {
+        if (err) throw err;
+        notesArray = (JSON.parse(data));
+        notesArray = notesArray.filter(note => {
+            return note.id !== deletedNote;
+        });
+        res.json(notesArray);       
+
+        fs.writeFile(jsonFilePath, JSON.stringify(notesArray, null, 2), (err) => {
+            if (err) throw err;
+        });
+    })
+}
+
+module.exports = {
+    postNotes,
+    getNotes,
+    deleteNotes
+};

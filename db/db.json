@@ -1,7 +1,17 @@
 [
   {
-    "title": "First test",
-    "text": "should have an id",
+    "title": "New note 1",
+    "text": "9494",
     "id": 1
+  },
+  {
+    "title": "New note 4",
+    "text": "egtergoiufe",
+    "id": 4
+  },
+  {
+    "title": "New note 2",
+    "text": "9494",
+    "id": 5
   }
 ]
