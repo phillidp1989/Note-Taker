@@ -4,7 +4,7 @@ const path = require('path');
 const jsonFolderPath = path.join(__dirname, "db");
 const jsonFilePath = path.join(jsonFolderPath, "/db.json");
 
-// Post notes function
+// Post notes callback function
 
 const postNotes = (req, res) => {
     // Variable to hold new note object obtained from the body of the post request
@@ -48,9 +48,7 @@ const postNotes = (req, res) => {
         fs.writeFile(jsonFilePath, JSON.stringify(notesArray, null, 2), (err) => {
             if (err) throw err;
         });
-
     });
-
 }
 
 // Get notes callback function
