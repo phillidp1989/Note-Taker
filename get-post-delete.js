@@ -6,7 +6,7 @@ const jsonFilePath = path.join(jsonFolderPath, "/db.json");
 
 const postNotes = (req, res) => {
     // Variable to hold new note object obtained from the body of the post request
-
+    
     let newNote = req.body;
 
     // Initialise an empty array to push note objects into
@@ -53,11 +53,10 @@ const deleteNotes = (req, res) => {
     fs.readFile(jsonFilePath, (err, data) => {
         if (err) throw err;
         notesArray = (JSON.parse(data));
-        for (let i = 0; i < notesArray.length; i++) {
-            if (deletedNote === notesArray[i].id) {
-                res.json(notesArray.splice(i, 1));
-            }
-        }
+        notesArray = notesArray.filter(note => {
+            return note.id !== deletedNote;
+        });
+        res.json(notesArray);       
 
         fs.writeFile(jsonFilePath, JSON.stringify(notesArray, null, 2), (err) => {
             if (err) throw err;
