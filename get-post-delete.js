@@ -4,6 +4,8 @@ const path = require('path');
 const jsonFolderPath = path.join(__dirname, "db");
 const jsonFilePath = path.join(jsonFolderPath, "/db.json");
 
+// Post notes function
+
 const postNotes = (req, res) => {
     // Variable to hold new note object obtained from the body of the post request
     
@@ -39,12 +41,16 @@ const postNotes = (req, res) => {
 
 }
 
+// Get notes callback function
+
 const getNotes = (req, res) => {
     fs.readFile(jsonFilePath, (err, data) => {
         if (err) throw err;
         res.json(JSON.parse(data))
     });
 }
+
+// Delete note callback function
 
 const deleteNotes = (req, res) => {
 
