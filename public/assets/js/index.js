@@ -37,8 +37,8 @@ var renderActiveNote = function() {
   $saveNoteBtn.hide();
 
   if (activeNote.id) {
-    $noteTitle.attr("readonly", true);
-    $noteText.attr("readonly", true);
+    $noteTitle.attr("readonly", false);
+    $noteText.attr("readonly", false);
     $noteTitle.val(activeNote.title);
     $noteText.val(activeNote.text);
   } else {
@@ -53,11 +53,14 @@ var renderActiveNote = function() {
 var handleNoteSave = function() {
   var newNote = {
     title: $noteTitle.val(),
-    text: $noteText.val()
-  };
+    text: $noteText.val(),
+    id: activeNote.id    
+  }; 
+  
 
   saveNote(newNote).then(function(data) {
     getAndRenderNotes();
+    // activeNote = {};
     renderActiveNote();
   });
 };
@@ -70,6 +73,8 @@ var handleNoteDelete = function(event) {
   var note = $(this)
     .parent(".list-group-item")
     .data();
+  
+  console.log(note.id);  
 
   if (activeNote.id === note.id) {
     activeNote = {};
@@ -83,6 +88,7 @@ var handleNoteDelete = function(event) {
 
 // Sets the activeNote and displays it
 var handleNoteView = function() {
+  console.log($(this).data());
   activeNote = $(this).data();
   renderActiveNote();
 };
