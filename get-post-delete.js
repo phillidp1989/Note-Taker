@@ -4,7 +4,7 @@ const path = require('path');
 const jsonFolderPath = path.join(__dirname, "db");
 const jsonFilePath = path.join(jsonFolderPath, "/db.json");
 
-// Post notes function
+// Post notes callback function
 
 const postNotes = (req, res) => {
     // Variable to hold new note object obtained from the body of the post request
@@ -22,7 +22,7 @@ const postNotes = (req, res) => {
 
         notesArray = (JSON.parse(data));
 
-        // Assignment of id to new note object
+        // Assignment of id to new note object if it is a new note
 
 
         if (newNote.id === undefined) {
@@ -32,8 +32,10 @@ const postNotes = (req, res) => {
             } else {
                 newNote.id = notesArray[notesArray.length - 1].id + 1;
             }
-
             notesArray.push(newNote);
+
+        // If the note is being edited, then the existing note will be updated with new title and text
+
         } else {
             for (let i = 0; i < notesArray.length; i++) {
 
@@ -48,9 +50,7 @@ const postNotes = (req, res) => {
         fs.writeFile(jsonFilePath, JSON.stringify(notesArray, null, 2), (err) => {
             if (err) throw err;
         });
-
     });
-
 }
 
 // Get notes callback function

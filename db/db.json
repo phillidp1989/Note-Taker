@@ -1,7 +1,17 @@
 [
   {
-    "title": "Edit",
-    "text": "This text",
-    "id": "2"
+    "title": "First note",
+    "text": "Text",
+    "id": 1
+  },
+  {
+    "title": "Second note",
+    "text": "More text",
+    "id": 2
+  },
+  {
+    "title": "Second edit",
+    "text": "Final text",
+    "id": "3"
   }
 ]

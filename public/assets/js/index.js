@@ -57,10 +57,9 @@ var handleNoteSave = function() {
     id: activeNote.id    
   }; 
   
-
   saveNote(newNote).then(function(data) {
     getAndRenderNotes();
-    // activeNote = {};
+    activeNote = {};
     renderActiveNote();
   });
 };
