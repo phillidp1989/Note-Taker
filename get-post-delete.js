@@ -22,7 +22,7 @@ const postNotes = (req, res) => {
 
         notesArray = (JSON.parse(data));
 
-        // Assignment of id to new note object
+        // Assignment of id to new note object if it is a new note
 
 
         if (newNote.id === undefined) {
@@ -32,8 +32,10 @@ const postNotes = (req, res) => {
             } else {
                 newNote.id = notesArray[notesArray.length - 1].id + 1;
             }
-
             notesArray.push(newNote);
+
+        // If the note is being edited, then the existing note will be updated with new title and text
+
         } else {
             for (let i = 0; i < notesArray.length; i++) {
 
