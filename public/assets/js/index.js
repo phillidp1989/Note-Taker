@@ -7,6 +7,7 @@ var $noteList = $(".list-container .list-group");
 // activeNote is used to keep track of the note in the textarea
 var activeNote = {};
 
+
 // A function for getting all notes from the db
 var getNotes = function() {
   return $.ajax({
@@ -102,9 +103,9 @@ var handleNewNoteView = function() {
 // Or else show it
 var handleRenderSaveBtn = function() {
   if (!$noteTitle.val().trim() || !$noteText.val().trim()) {
-    $saveNoteBtn.hide();
+    $saveNoteBtn.hide();            
   } else {
-    $saveNoteBtn.show();
+    $saveNoteBtn.show();    
   }
 };
 
@@ -127,7 +128,8 @@ var renderNoteList = function(notes) {
     noteListItems.push($li);
   }
 
-  $noteList.append(noteListItems);
+  $noteList.append(noteListItems); 
+
 };
 
 // Gets notes from the db and renders them to the sidebar
