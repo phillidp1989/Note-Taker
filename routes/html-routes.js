@@ -13,7 +13,6 @@ app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "../public", "notes.html"));
 });
 
-
 // Final HTML routes to direct users to the homepage
 
 app.get("*", (req, res) => {
