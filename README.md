@@ -29,6 +29,8 @@ This application can be used to write, save, edit and delete notes. This applica
 ## Installation:
 Clone the report onto your local computer and install all npm modules using the command "npm install". Run the server by calling node app.js from the commandline open in the root folder to host the website locally.
 
+The application has been deployed via Heroku: https://phillidp-note-taker.herokuapp.com/notes
+
 ## Usage:
 Users can click the plus icon or directly into the title or note body text fields to start creating their new note. Once a title and note have been typed, the user can save the note by clicking on the save icon which will then save the note to the local server and render the saved note to the sidebar for future reference. Notes can be edited by clicking on the saved note in the sidebar and updating the title or text. Notes can also be deleted by clicking the trash icon next to the relevant saved note.
 
