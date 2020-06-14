@@ -29,7 +29,7 @@ const postNotes = (req, res) => {
             if (notesArray.length === 0) {
                 newNote.id = 1;
             } else {
-                newNote.id = notesArray[notesArray.length - 1].id + 1;
+                newNote.id = parseInt(notesArray[notesArray.length - 1].id) + 1;
             }
             notesArray.push(newNote);
 
@@ -38,6 +38,7 @@ const postNotes = (req, res) => {
         } else {
             for (let i = 0; i < notesArray.length; i++) {
                 if (parseInt(newNote.id) === parseInt(notesArray[i].id)) {
+                    newNote.id = parseInt(newNote.id);
                     notesArray[i] = newNote;
                 }
             }

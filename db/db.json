@@ -1,17 +1,17 @@
 [
   {
     "title": "Save note",
-    "text": "Save",
+    "text": "save",
     "id": 1
   },
   {
-    "title": "Edit note",
-    "text": "Edit",
+    "title": "Edit notes",
+    "text": "edit",
     "id": 2
   },
   {
-    "title": "Delete note",
-    "text": "Delete",
+    "title": "Delete notes",
+    "text": "delete",
     "id": 3
   }
 ]
