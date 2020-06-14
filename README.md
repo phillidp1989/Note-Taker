@@ -24,7 +24,7 @@
 This application can be used to write, save, edit and delete notes. This application uses an express backend and saves and retrieves note data from a JSON file.
 
 ## Visuals:
-![screenshot](http://placeholder.com)
+![screenshot](https://github.com/phillidp1989/Note-Taker/blob/master/assets/demo-gif.gif)
 
 ## Installation:
 Clone the report onto your local computer and install all npm modules using the command "npm install". Run the server by calling node app.js from the commandline open in the root folder to host the website locally.
