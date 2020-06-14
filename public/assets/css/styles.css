@@ -34,14 +34,16 @@ html, body {
 .note-textarea {
   resize: none;
   height: calc(100% - 63px);
-  padding-top: 15px;
+  margin-top: 15px;
+  padding-top: 5px;
   font-size: 2rem;
+  border-top: 3px rgba(0,0,0,0.125) solid;
 }
 
 .note-title {
   height: 50px;
-  margin-top: 13px;
-  font-size: 3.5rem;
+  margin-top: 20px;    
+  font-size: 3.5rem;  
 }
 
 .note-title:read-only, .note-textarea:read-only {
@@ -80,5 +82,7 @@ html, body {
 }
 
 li {
-  font-size: 1.5rem; 
+  font-size: 1.5rem;
+  border: 3px black solid; 
 }
+
